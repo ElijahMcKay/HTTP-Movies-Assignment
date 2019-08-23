@@ -75,3 +75,7 @@ body {
   color: red;
   text-align: center;
 }
+
+.edit-button { 
+  margin-top: 40px; 
+}
