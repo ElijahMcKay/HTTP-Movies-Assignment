@@ -46,8 +46,8 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
-        <Route path={`/update-movie/${this.props.match.params.id}`} component={UpdateMovie} />
-        <Link to={`/update-movie/${this.props.match.params.id}`}>
+        <Route path="/update-movie/:id" component={UpdateMovie} />
+        <Link to={`/update-movie/${this.state.movie.id}`}>
           <button className="save-button edit-button">Edit</button>
         </Link>
       </div>
