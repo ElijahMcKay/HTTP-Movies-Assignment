@@ -1,14 +1,10 @@
-import React, { createContext } from 'react';
-
-
-export const MovieContext = createContext(); 
+import React from 'react';
 
 const MovieCard = props => {
   const { title, director, metascore, stars } = props.movie;
 
   console.log(title); 
   return (
-    <MovieContext.Provider value={props.movie}>
       <div className="movie-card">
         <h2>{title}</h2>
         <div className="movie-director">
@@ -25,8 +21,7 @@ const MovieCard = props => {
           </div>
         ))}
       </div>
-    </MovieContext.Provider>
-  );
+    );
 };
 
 export default MovieCard;

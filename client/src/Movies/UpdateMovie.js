@@ -1,11 +1,20 @@
-import React, { useContext }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import axios from 'axios';
-import { MovieContext } from './MovieCard'; 
+
 const UpdateMovie = (props) => {
 
-    const myData = useContext(MovieContext); 
+    const [ movie, setMovie ] = useState()
 
-    console.log(myData); 
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/api/movies")
+            .then(res => {
+                setMovie(res.data)
+                console.log(res); 
+            })
+            .catch(err => console.log(err.response));
+        }, [])
+
     const handleSubmit = (e) => {
         e.preventDefault(); 
         axios
@@ -15,6 +24,16 @@ const UpdateMovie = (props) => {
     const handleChange = (e) => {
         e.preventDefault(); 
     }
+
+    // const fetchMovies = () => {
+    //     axios
+    //         .get("http://localhost:5000/api/movies")
+    //         .then(res => {
+    //             setMovie({ movies: res.data })
+    //             console.log(movie); 
+    //         })
+    //         .catch(err => console.log(err.response));
+    // }
 
     return ( 
         <>
