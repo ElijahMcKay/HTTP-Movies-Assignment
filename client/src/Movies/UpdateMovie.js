@@ -9,14 +9,8 @@ const UpdateMovie = (props) => {
     })
 
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/api/movies")
-            .then(res => {
-                setMovie(res.data)
-                console.log(res); 
-            })
-            .catch(err => console.log(err.response));
-        }, [])
+            fetchMovies(props.match.params.id); 
+        }, [props.match.params.id])
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -32,25 +26,22 @@ const UpdateMovie = (props) => {
         setMovie(
             {...movie, 
             stars: movie.stars.map((star, starIndex) => {
-                if (starIndex === index) {
-                    return e.target.value; 
-                } else {
-                    return star; 
-                }
+                return starIndex === index ? e.target.value : star
             })
         })
+        
     }
 
     console.log(movie); 
-    // const fetchMovies = () => {
-    //     axios
-    //         .get("http://localhost:5000/api/movies")
-    //         .then(res => {
-    //             setMovie({ movies: res.data })
-    //             console.log(movie); 
-    //         })
-    //         .catch(err => console.log(err.response));
-    // }
+    const fetchMovies = (id) => {
+        axios
+            .get(`http://localhost:5000/api/movies/${id}`)
+            .then(res => {
+                setMovie(res.datad)
+                console.log(movie); 
+            })
+            .catch(err => console.log(err.response));
+    }
 
     return ( 
         <>
@@ -86,6 +77,7 @@ const UpdateMovie = (props) => {
                     return  <input 
                             onChange={handleStar(index)}
                             type='text'
+                            placeholder="star"
                             value={star}
                             name="star"
                 />
